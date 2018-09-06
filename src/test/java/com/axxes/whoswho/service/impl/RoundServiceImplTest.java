@@ -5,23 +5,25 @@ import com.axxes.whoswho.model.Round;
 import com.axxes.whoswho.model.Sex;
 import com.axxes.whoswho.repository.PersonRepository;
 import com.axxes.whoswho.service.RoundService;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureTestEntityManager;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 import static org.assertj.core.api.Java6Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.Assert.fail;
+
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-class RoundServiceImplTest {
+public class RoundServiceImplTest {
 
     private Person personPlaying;
     private List<Person> persons = new ArrayList<>();
@@ -32,8 +34,8 @@ class RoundServiceImplTest {
     @Autowired
     private RoundService roundService;
 
-    @BeforeEach
-    void setUp() {
+    @Before
+    public void setUp() {
         personPlaying = new Person("Benjamin", "Goesaert", "", Sex.MALE);
 
         persons.add(personPlaying);
@@ -75,7 +77,7 @@ class RoundServiceImplTest {
     }
 
     @Test
-    void PersonPlayingDoesNotExistInRound() {
+    public void personPlayingDoesNotExistInRound() {
         List<Round> rounds = roundService.getRounds(personPlaying);
 
 
@@ -85,6 +87,39 @@ class RoundServiceImplTest {
                     fail("Person playing is present in rounds");
                 }
             });
+        });
+    }
+
+    @Test
+    public void onlySameGenderInRound() {
+        List<Round> rounds = roundService.getRounds(personPlaying);
+
+        rounds.forEach(round -> {
+            List<Person> persons = round.getPersons();
+            Enum<Sex> genderFirstPerson = persons.get(0).getSex();
+            persons.forEach(person -> {
+                if (person.getSex() != genderFirstPerson) {
+                    fail("Mixed up genders in round");
+                }
+            });
+       });
+    }
+
+    @Test
+    public void twentyRoundsInGame() {
+        List<Round> rounds = roundService.getRounds(personPlaying);
+        assertThat(rounds.size()).isEqualTo(20);
+    }
+
+    @Test
+    public void personOnlyAppearsOnceInRound() {
+        List<Round> rounds = roundService.getRounds(personPlaying);
+
+        rounds.forEach(round -> {
+            Set<Person> set = new HashSet<>(round.getPersons());
+            if (set.size() < round.getPersons().size()) {
+                fail("Person appears more then 1 time in round");
+            }
         });
     }
 }

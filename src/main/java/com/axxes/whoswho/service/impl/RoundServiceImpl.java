@@ -30,14 +30,15 @@ public class RoundServiceImpl implements RoundService {
     public List<Round> getRounds(Person playingPerson) {
         List<Round> rounds;
 
-        List<Person> allPersonsExceptPlayingPerson = Lists.newArrayList(this.personRepository.findAll());
-        Collections.shuffle(allPersonsExceptPlayingPerson);
+        List<Person> allPersons = Lists.newArrayList(this.personRepository.findAll());
+        allPersons.remove(playingPerson);
+        Collections.shuffle(allPersons);
 
-        List<Person> selectedPersons = allPersonsExceptPlayingPerson.subList(0, NUMBEROFROUNDS);
+        List<Person> selectedPersons = allPersons.subList(0, NUMBEROFROUNDS);
 
         rounds = selectedPersons
                 .stream()
-                .map(s -> this.createRound(allPersonsExceptPlayingPerson, s))
+                .map(s -> this.createRound(allPersons, s))
                 .collect(Collectors.toList());
 
         return rounds;

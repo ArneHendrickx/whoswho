@@ -5,5 +5,6 @@ import com.axxes.whoswho.model.Person;
 
 public interface GameService {
     Game createGameForPerson(Person person);
+    Game saveGame(Game game);
 
 }

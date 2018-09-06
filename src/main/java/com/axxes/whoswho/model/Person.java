@@ -17,22 +17,18 @@ public class Person {
     @Column
     private String pictureUrl;
     @Column
-    private Enum<Sex> sex;
+    private Sex sex;
 
     public Person(){
 
     }
 
-    public Person(String firstname, String lastname, String pictureUrl, Enum<Sex> sex) {
+    public Person(String firstname, String lastname, String pictureUrl, Sex sex) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.pictureUrl = pictureUrl;
         this.sex = sex;
     }
-
-
-
-
 
     public long getId() {
         return id;
@@ -66,11 +62,11 @@ public class Person {
         this.pictureUrl = pictureUrl;
     }
 
-    public Enum<Sex> getSex() {
+    public Sex getSex() {
         return sex;
     }
 
-    public void setSex(Enum<Sex> sex) {
+    public void setSex(Sex sex) {
         this.sex = sex;
     }
 

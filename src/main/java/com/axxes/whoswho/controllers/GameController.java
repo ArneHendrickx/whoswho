@@ -1,26 +1,29 @@
 package com.axxes.whoswho.controllers;
 
 
+import com.axxes.whoswho.model.Game;
 import com.axxes.whoswho.model.Person;
 import com.axxes.whoswho.model.Sex;
-import com.axxes.whoswho.repository.PersonRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.axxes.whoswho.service.GameService;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/games")
 public class GameController {
 
-    private final PersonRepository personRepository;
+    private final GameService gameService;
 
-    public GameController(PersonRepository personRepository) {
-        this.personRepository = personRepository;
+    public GameController(GameService gameService) {
+        this.gameService = gameService;
     }
 
-    @GetMapping
-    public Iterable<Person> getPersons() {
-        personRepository.save(new Person("Freddy", "De Vadder", "", Sex.MALE));
-        return personRepository.findAll();
+    @PostMapping("/create")
+    public Game generateGame(@RequestBody Person person) {
+        return gameService.createGameForPerson(person);
+    }
+
+    @PostMapping
+    public Game saveGame(RequestBody Game game) {
+        return gameService.save(game);
     }
 }

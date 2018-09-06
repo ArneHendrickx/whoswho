@@ -1,5 +1,6 @@
 package com.axxes.whoswho.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
@@ -21,6 +22,7 @@ public class Round {
     private List<Person> persons;
     @ManyToOne
     @JoinColumn(name = "game_id")
+    @JsonIgnore
     private Game game;
 
     public Round(long rightPersonId, long guessedPersonId, List<Person> persons) {
