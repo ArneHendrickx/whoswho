@@ -4,17 +4,24 @@ public class Score {
     private String firstName;
     private String lastName;
     private int score;
-    private double playTime;
+    private double playTimeInMillis;
     private int amountPlayed;
 
     public Score() {
+    }
+
+    public Score(String firstName, String lastName, int score, double playTimeInMillis) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.score = score;
+        this.playTimeInMillis = playTimeInMillis;
     }
 
     public Score(String firstName, String lastName, int score, double playTime, int amountPlayed) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.score = score;
-        this.playTime = playTime;
+        this.playTimeInMillis = playTime;
         this.amountPlayed = amountPlayed;
     }
 
@@ -42,12 +49,12 @@ public class Score {
         this.score = score;
     }
 
-    public double getPlayTime() {
-        return playTime;
+    public double getPlayTimeInMillis() {
+        return playTimeInMillis;
     }
 
-    public void setPlayTime(double playTime) {
-        this.playTime = playTime;
+    public void setPlayTimeInMillis(double playTimeInMillis) {
+        this.playTimeInMillis = playTimeInMillis;
     }
 
     public int getAmountPlayed() {
