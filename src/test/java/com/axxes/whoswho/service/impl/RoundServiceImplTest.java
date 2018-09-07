@@ -9,6 +9,8 @@ import org.junit.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.junit.Test;
 
@@ -22,7 +24,7 @@ import static org.junit.Assert.fail;
 
 
 @RunWith(SpringRunner.class)
-@DataJpaTest
+@SpringBootTest
 public class RoundServiceImplTest {
 
     private Person personPlaying;
@@ -36,42 +38,40 @@ public class RoundServiceImplTest {
 
     @Before
     public void setUp() {
-        personPlaying = new Person("Benjamin", "Goesaert", "", Sex.MALE);
+        personPlaying = new Person("2","Benjamin", "Goesaert", "", Sex.MALE);
 
         persons.add(personPlaying);
-        persons.add(new Person("Freddy", "De Vadder", "", Sex.MALE));
-        persons.add(new Person("Kevin", "Goesaert", "", Sex.MALE));
-        persons.add(new Person("Marloes", "Goesaert", "", Sex.FEMALE));
-        persons.add(new Person("Maarten", "Goesaert", "", Sex.MALE));
-        persons.add(new Person("Mathijs", "Goesaert", "", Sex.MALE));
-        persons.add(new Person("Mats", "Goesaert", "", Sex.MALE));
-        persons.add(new Person("Charlien", "Goesaert", "", Sex.FEMALE));
-        persons.add(new Person("Stef", "Goesaert", "", Sex.MALE));
-        persons.add(new Person("Elize", "Goesaert", "", Sex.FEMALE));
-        persons.add(new Person("Benjamin", "Goesaert", "", Sex.FEMALE));
-        persons.add(new Person("Jonas", "Goesaert", "", Sex.MALE));
-        persons.add(new Person("Jelle", "Goesaert", "", Sex.MALE));
-        persons.add(new Person("Bram", "Goesaert", "", Sex.MALE));
-        persons.add(new Person("Andrea", "Goesaert", "", Sex.FEMALE));
-        persons.add(new Person("Jan", "Goesaert", "", Sex.MALE));
-        persons.add(new Person("Tom", "Goesaert", "", Sex.MALE));
-        persons.add(new Person("Lieven", "Goesaert", "", Sex.MALE));
-        persons.add(new Person("Shauni", "Goesaert", "", Sex.FEMALE));
-        persons.add(new Person("Fien", "Goesaert", "", Sex.FEMALE));
-        persons.add(new Person("Arne", "Goesaert", "", Sex.MALE));
-        persons.add(new Person("Julie", "Goesaert", "", Sex.FEMALE));
-        persons.add(new Person("Jorgi", "Goesaert", "", Sex.MALE));
-        persons.add(new Person("Thomas", "Goesaert", "", Sex.MALE));
-        persons.add(new Person("Greogory", "Goesaert", "", Sex.MALE));
-        persons.add(new Person("Shanah", "Goesaert", "", Sex.FEMALE));
-        persons.add(new Person("Lode", "Goesaert", "", Sex.MALE));
-        persons.add(new Person("Zento", "Goesaert", "", Sex.MALE));
-        persons.add(new Person("Kevin", "Goesaert", "", Sex.MALE));
-        persons.add(new Person("Sarah", "Goesaert", "", Sex.FEMALE));
-        persons.add(new Person("Jana", "Goesaert", "", Sex.FEMALE));
-        persons.add(new Person("Kaat", "Goesaert", "", Sex.FEMALE));
-        persons.add(new Person("Marieke", "Goesaert", "", Sex.FEMALE));
-        persons.add(new Person("Vicky", "Goesaert", "", Sex.FEMALE));
+        persons.add(new Person("1","Freddy", "De Vadder", "", Sex.MALE));
+        persons.add(new Person("2","2,Kevin", "Goesaert", "", Sex.MALE));
+        persons.add(new Person("3","2,Marloes", "Goesaert", "", Sex.FEMALE));
+        persons.add(new Person("4","2,Maarten", "Goesaert", "", Sex.MALE));
+        persons.add(new Person("5","Charlien", "Goesaert", "", Sex.FEMALE));
+        persons.add(new Person("6","Stef", "Goesaert", "", Sex.MALE));
+        persons.add(new Person("7","Elize", "Goesaert", "", Sex.FEMALE));
+        persons.add(new Person("8","Benjamin", "Goesaert", "", Sex.FEMALE));
+        persons.add(new Person("9","Jonas", "Goesaert", "", Sex.MALE));
+        persons.add(new Person("10","Jelle", "Goesaert", "", Sex.MALE));
+        persons.add(new Person("11","Bram", "Goesaert", "", Sex.MALE));
+        persons.add(new Person("12","Andrea", "Goesaert", "", Sex.FEMALE));
+        persons.add(new Person("12","Jan", "Goesaert", "", Sex.MALE));
+        persons.add(new Person("13","Tom", "Goesaert", "", Sex.MALE));
+        persons.add(new Person("14","Lieven", "Goesaert", "", Sex.MALE));
+        persons.add(new Person("15","Shauni", "Goesaert", "", Sex.FEMALE));
+        persons.add(new Person("16","Fien", "Goesaert", "", Sex.FEMALE));
+        persons.add(new Person("17","Arne", "Goesaert", "", Sex.MALE));
+        persons.add(new Person("18","Julie", "Goesaert", "", Sex.FEMALE));
+        persons.add(new Person("19","Jorgi", "Goesaert", "", Sex.MALE));
+        persons.add(new Person("20","Thomas", "Goesaert", "", Sex.MALE));
+        persons.add(new Person("21","Greogory", "Goesaert", "", Sex.MALE));
+        persons.add(new Person("22","Shanah", "Goesaert", "", Sex.FEMALE));
+        persons.add(new Person("23","Lode", "Goesaert", "", Sex.MALE));
+        persons.add(new Person("24","Zento", "Goesaert", "", Sex.MALE));
+        persons.add(new Person("25","Kevin", "Goesaert", "", Sex.MALE));
+        persons.add(new Person("26","Sarah", "Goesaert", "", Sex.FEMALE));
+        persons.add(new Person("27","Jana", "Goesaert", "", Sex.FEMALE));
+        persons.add(new Person("28","Kaat", "Goesaert", "", Sex.FEMALE));
+        persons.add(new Person("29","Marieke", "Goesaert", "", Sex.FEMALE));
+        persons.add(new Person("30","Vicky", "Goesaert", "", Sex.FEMALE));
 
         personRepository.saveAll(persons);
     }
@@ -96,7 +96,7 @@ public class RoundServiceImplTest {
 
         rounds.forEach(round -> {
             List<Person> persons = round.getPersons();
-            Enum<Sex> genderFirstPerson = persons.get(0).getSex();
+            Sex genderFirstPerson = persons.get(0).getSex();
             persons.forEach(person -> {
                 if (person.getSex() != genderFirstPerson) {
                     fail("Mixed up genders in round");

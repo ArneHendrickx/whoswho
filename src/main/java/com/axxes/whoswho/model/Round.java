@@ -14,9 +14,9 @@ public class Round {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column
-    private long rightPersonId;
+    private String rightPersonId;
     @Column
-    private long guessedPersonId;
+    private String guessedPersonId;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Transient
     private List<Person> persons;
@@ -25,19 +25,15 @@ public class Round {
     @JsonIgnore
     private Game game;
 
-    public Round(long rightPersonId, long guessedPersonId, List<Person> persons) {
+    public Round(String rightPersonId, String guessedPersonId, List<Person> persons) {
         this.rightPersonId = rightPersonId;
         this.guessedPersonId = guessedPersonId;
         this.persons = persons;
     }
 
-    public Round(long rightPersonId,  List<Person> persons) {
-        this.rightPersonId = rightPersonId;
-        this.persons = persons;
-    }
-
     public Round(String id, List<Person> personsInRound){
-
+        this.rightPersonId = id;
+        this.persons = personsInRound;
     }
 
     public long getId() {
@@ -48,19 +44,19 @@ public class Round {
         this.id = id;
     }
 
-    public long getRightPersonId() {
+    public String getRightPersonId() {
         return rightPersonId;
     }
 
-    public void setRightPersonId(long rightPersonId) {
+    public void setRightPersonId(String rightPersonId) {
         this.rightPersonId = rightPersonId;
     }
 
-    public long getGuessedPersonId() {
+    public String getGuessedPersonId() {
         return guessedPersonId;
     }
 
-    public void setGuessedPersonId(long guessedPersonId) {
+    public void setGuessedPersonId(String guessedPersonId) {
         this.guessedPersonId = guessedPersonId;
     }
 

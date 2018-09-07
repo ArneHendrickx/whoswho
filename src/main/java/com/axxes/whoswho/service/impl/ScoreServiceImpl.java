@@ -39,7 +39,7 @@ public class ScoreServiceImpl implements ScoreService {
                 .stream()
                 .map(g -> new Score(
                         g.getPerson().getGivenName(),
-                        g.getPerson().getSurname(),
+                        g.getPerson().getSurName(),
                         g.getScore(),
                         Duration.between(g.getEndTime(), g.getEndTime()).toMillis(),
                         getAmountPlayedPerPlayer(gamesInCurrentMonth,g.getPerson())))

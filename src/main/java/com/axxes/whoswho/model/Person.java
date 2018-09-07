@@ -1,10 +1,8 @@
 package com.axxes.whoswho.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.context.annotation.Primary;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 @Table(name = "persons")
@@ -16,10 +14,11 @@ public class Person {
     @Column
     private String givenName;
     @Column
-    private String surname;
+    private String surName;
     @Column
-    private String lastName;
-    @Column
+    private String displayName;
+    @Column(name = "sex")
+    @Enumerated(value = EnumType.STRING)
     private Sex sex;
 
     public Person(){
@@ -29,8 +28,8 @@ public class Person {
     public Person(String id, String givenName, String surname, String lastName, Sex sex) {
         this.id = id;
         this.givenName = givenName;
-        this.surname = surname;
-        this.lastName = lastName;
+        this.surName = surname;
+        this.displayName = lastName;
         this.sex = sex;
     }
 
@@ -50,20 +49,20 @@ public class Person {
         this.givenName = givenName;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getSurName() {
+        return surName;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setSurName(String surName) {
+        this.surName = surName;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getDisplayName() {
+        return displayName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
     }
 
     public Sex getSex() {
