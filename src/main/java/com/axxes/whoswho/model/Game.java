@@ -11,7 +11,7 @@ public class Game {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @OneToMany(targetEntity = Round.class, fetch = FetchType.EAGER, mappedBy = "game")
+    @OneToMany(targetEntity = Round.class, fetch = FetchType.LAZY, mappedBy = "game")
     @ElementCollection(targetClass = Round.class)
     private List<Round> rounds;
     @Column

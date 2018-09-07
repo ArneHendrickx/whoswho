@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.axxes.whoswho.controllers","com.axxes.whoswho.repository","com.axxes.whoswho.controllers","com.axxes.whoswho.service"})
+@ComponentScan(basePackages = {"com.axxes.whoswho.controllers","com.axxes.whoswho.repository","com.axxes.whoswho.controllers","com.axxes.whoswho.service", "com.axxes.whoswho.configuration"})
 public class WhoswhoApplication {
 
 	private List<Person> persons = new ArrayList<>();

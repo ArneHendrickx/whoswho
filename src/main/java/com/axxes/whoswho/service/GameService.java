@@ -2,8 +2,6 @@ package com.axxes.whoswho.service;
 
 import com.axxes.whoswho.model.Game;
 import com.axxes.whoswho.model.Person;
-import javassist.NotFoundException;
-
 import java.util.Optional;
 
 public interface GameService {
