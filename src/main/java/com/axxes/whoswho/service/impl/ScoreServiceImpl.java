@@ -5,16 +5,11 @@ import com.axxes.whoswho.model.Person;
 import com.axxes.whoswho.model.Score;
 import com.axxes.whoswho.repository.GameRepository;
 import com.axxes.whoswho.service.ScoreService;
-import org.aspectj.weaver.ast.Not;
 import org.springframework.stereotype.Service;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.time.Duration;
 import java.time.LocalDate;
-import java.time.Period;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -43,8 +38,8 @@ public class ScoreServiceImpl implements ScoreService {
         List<Score> scoreBoardWithAllScores = gamesInCurrentMonth
                 .stream()
                 .map(g -> new Score(
-                        g.getPerson().getFirstname(),
-                        g.getPerson().getLastname(),
+                        g.getPerson().getGivenName(),
+                        g.getPerson().getSurname(),
                         g.getScore(),
                         Duration.between(g.getEndTime(), g.getEndTime()).toMillis(),
                         getAmountPlayedPerPlayer(gamesInCurrentMonth,g.getPerson())))

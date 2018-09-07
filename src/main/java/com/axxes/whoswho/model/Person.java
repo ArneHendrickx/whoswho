@@ -1,21 +1,24 @@
 package com.axxes.whoswho.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.context.annotation.Primary;
+
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 @Table(name = "persons")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Person {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private String id;
     @Column
-    private String firstname;
+    private String givenName;
     @Column
-    private String lastname;
+    private String surname;
     @Column
-    private String pictureUrl;
+    private String lastName;
     @Column
     private Sex sex;
 
@@ -23,43 +26,44 @@ public class Person {
 
     }
 
-    public Person(String firstname, String lastname, String pictureUrl, Sex sex) {
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.pictureUrl = pictureUrl;
+    public Person(String id, String givenName, String surname, String lastName, Sex sex) {
+        this.id = id;
+        this.givenName = givenName;
+        this.surname = surname;
+        this.lastName = lastName;
         this.sex = sex;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getGivenName() {
+        return givenName;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setGivenName(String givenName) {
+        this.givenName = givenName;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
-    public String getPictureUrl() {
-        return pictureUrl;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setPictureUrl(String pictureUrl) {
-        this.pictureUrl = pictureUrl;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public Sex getSex() {
@@ -68,33 +72,5 @@ public class Person {
 
     public void setSex(Sex sex) {
         this.sex = sex;
-    }
-
-    @Override
-    public String toString() {
-        return "Person{" +
-                "id=" + id +
-                ", firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
-                ", pictureUrl='" + pictureUrl + '\'' +
-                ", sex=" + sex +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Person person = (Person) o;
-        return id == person.id &&
-                Objects.equals(firstname, person.firstname) &&
-                Objects.equals(lastname, person.lastname) &&
-                Objects.equals(pictureUrl, person.pictureUrl) &&
-                Objects.equals(sex, person.sex);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, firstname, lastname, pictureUrl, sex);
     }
 }

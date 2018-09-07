@@ -36,7 +36,7 @@ public class Round {
         this.persons = persons;
     }
 
-    public Round(){
+    public Round(String id, List<Person> personsInRound){
 
     }
 
