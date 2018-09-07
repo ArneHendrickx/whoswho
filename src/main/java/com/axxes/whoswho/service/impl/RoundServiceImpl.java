@@ -31,7 +31,10 @@ public class RoundServiceImpl implements RoundService {
         List<Round> rounds;
 
         List<Person> allPersons = Lists.newArrayList(this.personRepository.findAll());
+
+        //remove playing player from the list of all players
         allPersons.remove(playingPerson);
+
         Collections.shuffle(allPersons);
 
         List<Person> selectedPersons = allPersons.subList(0, NUMBEROFROUNDS);

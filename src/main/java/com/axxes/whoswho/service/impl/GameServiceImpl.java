@@ -8,6 +8,8 @@ import com.axxes.whoswho.service.GameService;
 import com.axxes.whoswho.service.RoundService;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class GameServiceImpl implements GameService {
 
@@ -35,6 +37,11 @@ public class GameServiceImpl implements GameService {
         gameRepository.save(game);
 
         return game;
+    }
+
+    @Override
+    public Optional<Game> getGameById(long id) {
+        return gameRepository.findById(id);
     }
 
     private long calculateScore(Game game) {

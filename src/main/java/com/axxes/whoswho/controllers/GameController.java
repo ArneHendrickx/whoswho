@@ -3,9 +3,12 @@ package com.axxes.whoswho.controllers;
 
 import com.axxes.whoswho.model.Game;
 import com.axxes.whoswho.model.Person;
-import com.axxes.whoswho.model.Sex;
 import com.axxes.whoswho.service.GameService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/games")
@@ -23,7 +26,18 @@ public class GameController {
     }
 
     @PostMapping
-    public Game saveGame(RequestBody Game game) {
-        return gameService.save(game);
+    public ResponseEntity<Game> saveGame(@RequestBody Game game) {
+        Game g = gameService.saveGame(game);
+        return ResponseEntity.created(URI.create("/api/games/"+g.getId())).build();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Game> getGameById(@PathVariable long id) {
+        Optional<Game> gameOptional = gameService.getGameById(id);
+        if (gameOptional.isPresent()) {
+            return ResponseEntity.ok(gameOptional.get());
+        }
+
+        return ResponseEntity.notFound().build();
     }
 }
