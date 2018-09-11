@@ -18,11 +18,6 @@ public class ScoreController {
         this.scoreService = scoreService;
     }
 
-    @GetMapping("/all")
-    public List<Score> generateScoreBoardAllTime() {
-        return scoreService.generateScoreBoardAllTime();
-    }
-
     @GetMapping("/monthly")
     public List<Score> getMonthlyScoreboard() {
         return scoreService.generateScoreBoardMonthly();

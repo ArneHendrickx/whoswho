@@ -25,7 +25,7 @@ import static org.junit.Assert.fail;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class RoundServiceImplTest {
+public class RoundServiceTest {
 
     private Person personPlaying;
     private List<Person> persons = new ArrayList<>();

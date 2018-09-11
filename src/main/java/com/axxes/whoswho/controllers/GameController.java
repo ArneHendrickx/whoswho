@@ -3,6 +3,7 @@ package com.axxes.whoswho.controllers;
 
 import com.axxes.whoswho.model.Game;
 import com.axxes.whoswho.model.Person;
+import com.axxes.whoswho.model.Round;
 import com.axxes.whoswho.service.GameService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,11 @@ public class GameController {
     @PostMapping("/create")
     public Game generateGame(@RequestBody Person person) {
         return gameService.createGameForPerson(person);
+    }
+
+    @PostMapping("/practice")
+    public Round generatePracticeRound(@RequestBody Person person) {
+        return gameService.createPracticeRound(person);
     }
 
     @PostMapping

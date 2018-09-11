@@ -1,6 +1,7 @@
 package com.axxes.whoswho.model;
 
 public class Score {
+    private String personId;
     private String firstName;
     private String lastName;
     private int score;
@@ -10,19 +11,21 @@ public class Score {
     public Score() {
     }
 
-    public Score(String firstName, String lastName, int score, double playTimeInMillis) {
+    public Score(String personId, String firstName, String lastName, int score, double playTimeInMillis, int amountPlayed) {
+        this.personId = personId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.score = score;
         this.playTimeInMillis = playTimeInMillis;
+        this.amountPlayed = amountPlayed;
     }
 
-    public Score(String firstName, String lastName, int score, double playTime, int amountPlayed) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.score = score;
-        this.playTimeInMillis = playTime;
-        this.amountPlayed = amountPlayed;
+    public String getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(String personId) {
+        this.personId = personId;
     }
 
     public String getFirstName() {

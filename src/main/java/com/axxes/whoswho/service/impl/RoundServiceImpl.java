@@ -47,6 +47,18 @@ public class RoundServiceImpl implements RoundService {
         return rounds;
     }
 
+    @Override
+    public Round getPracticeRound(Person playingPerson) {
+        List<Person> allPersons = Lists.newArrayList(this.personRepository.findAll());
+
+        //remove playing player from the list of all players
+        allPersons.remove(playingPerson);
+
+        Collections.shuffle(allPersons);
+
+        return createRound(allPersons, allPersons.get(0));
+    }
+
     private Round createRound(List<Person> allPersonsExceptPlayingPerson, Person selectedPerson){
         List<Person> personsInRound = new ArrayList<>();
         personsInRound.add(selectedPerson);

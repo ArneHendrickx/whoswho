@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface RoundService {
     List<Round> getRounds(Person playingPerson);
-
+    Round getPracticeRound(Person playingPerson);
 }

@@ -3,6 +3,7 @@ package com.axxes.whoswho.service.impl;
 
 import com.axxes.whoswho.model.Game;
 import com.axxes.whoswho.model.Person;
+import com.axxes.whoswho.model.Round;
 import com.axxes.whoswho.repository.GameRepository;
 import com.axxes.whoswho.service.GameService;
 import com.axxes.whoswho.service.RoundService;
@@ -29,6 +30,11 @@ public class GameServiceImpl implements GameService {
         game.setRounds(this.roundService.getRounds(person));
 
         return game;
+    }
+
+    @Override
+    public Round createPracticeRound(Person playingPerson) {
+        return roundService.getPracticeRound(playingPerson);
     }
 
     @Override
