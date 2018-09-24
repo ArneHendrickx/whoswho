@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.time.LocalDate;
-import java.util.Comparator;
-import java.util.List;
+import java.time.LocalDateTime;
+import java.util.*;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,25 +28,46 @@ public class ScoreServiceImpl implements ScoreService {
     public List<Score> generateScoreBoardMonthly() {
         List<Game> gamesInCurrentMonth = gameRepository.findByEndTimeBetween(getFirstDayOfMonth(), getLastDayOfMonth());
 
-        return gamesInCurrentMonth
+        Map<String, Score> bestScorePerPlayer = gamesInCurrentMonth
                 .stream()
-                .map(game -> new Score(
-                        game.getPerson().getId(),
-                        game.getPerson().getGivenName(),
-                        game.getPerson().getSurName(),
-                        game.getScore(),
-                        Duration.between(game.getEndTime(), game.getEndTime()).toMillis(),
-                        getAmountPlayedPerPlayer(gamesInCurrentMonth,game.getPerson())))
+                .map(getGameScoreFunction(gamesInCurrentMonth))
+                .collect(Collectors.groupingBy(Score::getPersonId, Collectors.collectingAndThen(
+                        //Collectors.reducing(Comparator.comparingInt(Score::getScore).thenComparing(Score::getPlayTimeInMillis))
+                        Collectors.reducing(compareScore()),
+                        Optional::get)));
+
+        return bestScorePerPlayer.values()
+                .stream()
                 .sorted(Comparator.comparing(Score::getScore).reversed().thenComparing(Score::getPlayTimeInMillis))
-                .collect(Collectors.groupingBy(Score::getPersonId)).entrySet().iterator().next().getValue();
+                .collect(Collectors.toList());
     }
 
-    private LocalDate getFirstDayOfMonth() {
-        return LocalDate.ofEpochDay(System.currentTimeMillis() / (24 * 60 * 60 * 1000) ).withDayOfMonth(1);
+    private BinaryOperator<Score> compareScore() {
+        return (Score s1, Score s2) -> {
+            if (s1.getScore() == s2.getScore()) {
+                return s1.getPlayTimeInMillis() > s2.getPlayTimeInMillis() ? s1 : s2;
+            } else {
+                return s1.getScore() > s2.getScore() ? s1 : s2;
+            }
+        };
     }
 
-    private LocalDate getLastDayOfMonth() {
-        return LocalDate.ofEpochDay(System.currentTimeMillis() / (24 * 60 * 60 * 1000) ).plusMonths(1).withDayOfMonth(1).minusDays(1);
+    private Function<Game, Score> getGameScoreFunction(List<Game> gamesInCurrentMonth) {
+        return game -> new Score(
+                game.getPerson().getId(),
+                game.getPerson().getGivenName(),
+                game.getPerson().getSurName(),
+                game.getScore(),
+                Duration.between(game.getStartTime(), game.getEndTime()).toMillis(),
+                getAmountPlayedPerPlayer(gamesInCurrentMonth, game.getPerson()));
+    }
+
+    private LocalDateTime getFirstDayOfMonth() {
+        return LocalDate.ofEpochDay(System.currentTimeMillis() / (24 * 60 * 60 * 1000) ).withDayOfMonth(1).atStartOfDay();
+    }
+
+    private LocalDateTime getLastDayOfMonth() {
+        return LocalDate.ofEpochDay(System.currentTimeMillis() / (24 * 60 * 60 * 1000) ).plusMonths(1).withDayOfMonth(1).minusDays(1).atTime(23,59);
     }
 
     private int getAmountPlayedPerPlayer(List<Game> games, Person player) {
