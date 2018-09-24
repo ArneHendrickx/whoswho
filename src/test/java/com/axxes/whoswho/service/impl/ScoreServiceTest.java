@@ -59,8 +59,8 @@ public class ScoreServiceTest {
         playedGames.add(new Game(new ArrayList<>(), 20, LocalDateTime.now().minusSeconds(40), LocalDateTime.now(), person1));
         playedGames.add(new Game(new ArrayList<>(), 14, LocalDateTime.now().minusSeconds(40), LocalDateTime.now(), person5));
         playedGames.add(new Game(new ArrayList<>(), 14, LocalDateTime.now().minusSeconds(35), LocalDateTime.now(), person2));
-        playedGames.add(new Game(new ArrayList<>(), 18, LocalDateTime.now().minusSeconds(40), LocalDateTime.now(), person3));
         playedGames.add(new Game(new ArrayList<>(), 18, LocalDateTime.now().minusSeconds(50), LocalDateTime.now(), person3));
+        playedGames.add(new Game(new ArrayList<>(), 18, LocalDateTime.now().minusSeconds(40), LocalDateTime.now(), person3));
         playedGames.add(new Game(new ArrayList<>(), 17, LocalDateTime.now().minusSeconds(50), LocalDateTime.now(), person3));
         playedGames.add(new Game(new ArrayList<>(), 16, LocalDateTime.now().minusSeconds(40), LocalDateTime.now(), person4));
 
@@ -85,6 +85,7 @@ public class ScoreServiceTest {
 
         assertThat(scoreBoard.get(0).getFirstName()).isEqualTo("Benjamin");
         assertThat(scoreBoard.get(1).getFirstName()).isEqualTo("Lieven");
+        assertThat(scoreBoard.get(1).getPlayTimeInMillis()).isEqualTo(40000.00);
         assertThat(scoreBoard.get(4).getFirstName()).isEqualTo("Vincent");
     }
 

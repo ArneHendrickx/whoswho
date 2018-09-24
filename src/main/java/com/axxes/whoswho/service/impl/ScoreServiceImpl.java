@@ -32,7 +32,6 @@ public class ScoreServiceImpl implements ScoreService {
                 .stream()
                 .map(getGameScoreFunction(gamesInCurrentMonth))
                 .collect(Collectors.groupingBy(Score::getPersonId, Collectors.collectingAndThen(
-                        //Collectors.reducing(Comparator.comparingInt(Score::getScore).thenComparing(Score::getPlayTimeInMillis))
                         Collectors.reducing(compareScore()),
                         Optional::get)));
 
@@ -45,7 +44,7 @@ public class ScoreServiceImpl implements ScoreService {
     private BinaryOperator<Score> compareScore() {
         return (Score s1, Score s2) -> {
             if (s1.getScore() == s2.getScore()) {
-                return s1.getPlayTimeInMillis() > s2.getPlayTimeInMillis() ? s1 : s2;
+                return s1.getPlayTimeInMillis() < s2.getPlayTimeInMillis() ? s1 : s2;
             } else {
                 return s1.getScore() > s2.getScore() ? s1 : s2;
             }
