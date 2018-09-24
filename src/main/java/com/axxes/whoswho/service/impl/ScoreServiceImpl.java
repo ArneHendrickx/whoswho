@@ -56,7 +56,7 @@ public class ScoreServiceImpl implements ScoreService {
         return game -> new Score(
                 game.getPerson().getId(),
                 game.getPerson().getGivenName(),
-                game.getPerson().getSurName(),
+                game.getPerson().getSurname(),
                 game.getScore(),
                 Duration.between(game.getStartTime(), game.getEndTime()).toMillis(),
                 getAmountPlayedPerPlayer(gamesInCurrentMonth, game.getPerson()));

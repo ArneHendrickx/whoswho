@@ -14,7 +14,7 @@ public class Person {
     @Column
     private String givenName;
     @Column
-    private String surName;
+    private String surname;
     @Column
     private String displayName;
     @Column(name = "sex")
@@ -28,7 +28,7 @@ public class Person {
     public Person(String id, String givenName, String surname, String lastName, Sex sex) {
         this.id = id;
         this.givenName = givenName;
-        this.surName = surname;
+        this.surname = surname;
         this.displayName = lastName;
         this.sex = sex;
     }
@@ -49,12 +49,12 @@ public class Person {
         this.givenName = givenName;
     }
 
-    public String getSurName() {
-        return surName;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setSurName(String surName) {
-        this.surName = surName;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public String getDisplayName() {
