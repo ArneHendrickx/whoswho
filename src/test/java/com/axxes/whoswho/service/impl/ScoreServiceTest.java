@@ -77,7 +77,7 @@ public class ScoreServiceTest {
     public void testScoreboardOrder() {
         List<Score> scoreBoard = scoreService.generateScoreBoardMonthly();
         System.out.println(scoreBoard.size());
-        System.out.println(Lists.newArrayList(gameRepository.findAll()).size());
+        System.out.println(gameRepository.findAll().size());
 
         if (scoreBoard.size() != 5) {
             fail("Size scoreboard is wrong!");

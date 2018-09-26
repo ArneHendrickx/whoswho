@@ -22,7 +22,6 @@ public class GameServiceImpl implements GameService {
         this.gameRepository = gameRepository;
     }
 
-
     @Override
     public Game createGameForPerson(Person person) {
         Game game = new Game();

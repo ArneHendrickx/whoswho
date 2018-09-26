@@ -9,4 +9,7 @@ import java.util.List;
 
 @Repository
 public interface PersonRepository extends CrudRepository<Person, Long> {
+
+    @Override
+    List<Person> findAll();
 }

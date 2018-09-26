@@ -9,5 +9,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface GameRepository extends CrudRepository<Game, Long> {
+
+    @Override
+    List<Game> findAll();
     List<Game> findByEndTimeBetween(LocalDateTime start, LocalDateTime end);
 }

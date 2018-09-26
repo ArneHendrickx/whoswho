@@ -17,8 +17,8 @@ import java.util.stream.Collectors;
 @Service
 public class RoundServiceImpl implements RoundService {
 
-    public static final int NUMBEROFROUNDS = 20;
-    public static final int NUMBEOFPERSONSINROUND = 4;
+    public static final int NUMBER_OF_ROUNDS = 20;
+    public static final int NUMBER_OF_PERSONS_IN_ROUND = 4;
 
     private final PersonRepository personRepository;
 
@@ -30,14 +30,14 @@ public class RoundServiceImpl implements RoundService {
     public List<Round> getRounds(Person playingPerson) {
         List<Round> rounds;
 
-        List<Person> allPersons = Lists.newArrayList(this.personRepository.findAll());
+        List<Person> allPersons = this.personRepository.findAll();
 
         //remove playing player from the list of all players
         allPersons.remove(playingPerson);
 
         Collections.shuffle(allPersons);
 
-        List<Person> selectedPersons = allPersons.subList(0, NUMBEROFROUNDS);
+        List<Person> selectedPersons = allPersons.subList(0, NUMBER_OF_ROUNDS);
 
         rounds = selectedPersons
                 .stream()
@@ -49,7 +49,7 @@ public class RoundServiceImpl implements RoundService {
 
     @Override
     public Round getPracticeRound(Person playingPerson) {
-        List<Person> allPersons = Lists.newArrayList(this.personRepository.findAll());
+        List<Person> allPersons = this.personRepository.findAll();
 
         //remove playing player from the list of all players
         allPersons.remove(playingPerson);
@@ -73,11 +73,12 @@ public class RoundServiceImpl implements RoundService {
     }
 
     private List<Person> generatePersonsInRound(List<Person> personsInRound, List<Person> sameGenderPersons) {
-        for (int i = 1; i < NUMBEOFPERSONSINROUND; i++){
+        for (int i = 1; i < NUMBER_OF_PERSONS_IN_ROUND; i++){
             Random random = new Random();
 
             Person person = sameGenderPersons.get(random.nextInt(sameGenderPersons.size()));
 
+            //Don't get a person that is already in the round
             while (personsInRound.contains(person)){
                 person = sameGenderPersons.get(random.nextInt(sameGenderPersons.size()));
             }

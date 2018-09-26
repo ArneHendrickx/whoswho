@@ -30,7 +30,7 @@ public class ScoreServiceImpl implements ScoreService {
 
         Map<String, Score> bestScorePerPlayer = gamesInCurrentMonth
                 .stream()
-                .map(getGameScoreFunction(gamesInCurrentMonth))
+                .map(convertGameToScore(gamesInCurrentMonth))
                 .collect(Collectors.groupingBy(Score::getPersonId, Collectors.collectingAndThen(
                         Collectors.reducing(compareScore()),
                         Optional::get)));
@@ -51,7 +51,7 @@ public class ScoreServiceImpl implements ScoreService {
         };
     }
 
-    private Function<Game, Score> getGameScoreFunction(List<Game> gamesInCurrentMonth) {
+    private Function<Game, Score> convertGameToScore(List<Game> gamesInCurrentMonth) {
         return game -> new Score(
                 game.getPerson().getId(),
                 game.getPerson().getGivenName(),

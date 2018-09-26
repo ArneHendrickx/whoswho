@@ -1,6 +1,5 @@
 package com.axxes.whoswho.controllers;
 
-
 import com.axxes.whoswho.model.Game;
 import com.axxes.whoswho.model.Person;
 import com.axxes.whoswho.model.Round;
