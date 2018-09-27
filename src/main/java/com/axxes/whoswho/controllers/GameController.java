@@ -1,9 +1,11 @@
 package com.axxes.whoswho.controllers;
 
+import com.axxes.whoswho.model.AfterGameResult;
 import com.axxes.whoswho.model.Game;
 import com.axxes.whoswho.model.Person;
 import com.axxes.whoswho.model.Round;
 import com.axxes.whoswho.service.GameService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,9 +33,10 @@ public class GameController {
     }
 
     @PostMapping
-    public ResponseEntity<Game> saveGame(@RequestBody Game game) {
-        Game g = gameService.saveGame(game);
-        return ResponseEntity.created(URI.create("/api/games/"+g.getId())).build();
+    public ResponseEntity<AfterGameResult> saveGame(@RequestBody Game game) {
+        AfterGameResult afterGameResult = gameService.saveGame(game);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(afterGameResult);
     }
 
     @GetMapping("/{id}")

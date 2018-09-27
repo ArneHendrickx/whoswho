@@ -5,6 +5,7 @@ import com.axxes.whoswho.model.Person;
 import com.axxes.whoswho.model.Score;
 import com.axxes.whoswho.repository.GameRepository;
 import com.axxes.whoswho.service.ScoreService;
+import com.axxes.whoswho.utils.DateTimeUtils;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
@@ -26,7 +27,7 @@ public class ScoreServiceImpl implements ScoreService {
 
     @Override
     public List<Score> generateScoreBoardMonthly() {
-        List<Game> gamesInCurrentMonth = gameRepository.findByEndTimeBetween(getFirstDayOfMonth(), getLastDayOfMonth());
+        List<Game> gamesInCurrentMonth = gameRepository.findByEndTimeBetween(DateTimeUtils.getFirstDayOfMonth(), DateTimeUtils.getLastDayOfMonth());
 
         Map<String, Score> bestScorePerPlayer = gamesInCurrentMonth
                 .stream()
@@ -61,15 +62,7 @@ public class ScoreServiceImpl implements ScoreService {
                 getAmountPlayedPerPlayer(gamesInCurrentMonth, game.getPerson()));
     }
 
-    private LocalDateTime getFirstDayOfMonth() {
-        return LocalDate.ofEpochDay(System.currentTimeMillis() / (24 * 60 * 60 * 1000) ).withDayOfMonth(1).atStartOfDay();
-    }
-
-    private LocalDateTime getLastDayOfMonth() {
-        return LocalDate.ofEpochDay(System.currentTimeMillis() / (24 * 60 * 60 * 1000) ).plusMonths(1).withDayOfMonth(1).minusDays(1).atTime(23,59);
-    }
-
-    private int getAmountPlayedPerPlayer(List<Game> games, Person player) {
+    public int getAmountPlayedPerPlayer(List<Game> games, Person player) {
         return (int)games.stream()
                 .filter(game -> game.getPerson().equals(player))
                 .count();

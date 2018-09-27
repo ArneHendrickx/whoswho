@@ -1,11 +1,9 @@
 package com.axxes.whoswho.service.impl;
 
-
 import com.axxes.whoswho.model.Person;
 import com.axxes.whoswho.model.Round;
 import com.axxes.whoswho.repository.PersonRepository;
 import com.axxes.whoswho.service.RoundService;
-import org.assertj.core.util.Lists;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
