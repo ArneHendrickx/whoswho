@@ -1,5 +1,7 @@
 package com.axxes.whoswho.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,8 +19,10 @@ public class Game {
     @Column
     private Integer score;
     @Column
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime startTime;
     @Column
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime endTime;
     @ManyToOne
     @JoinColumn(name = "person_id")
