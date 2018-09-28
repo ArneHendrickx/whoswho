@@ -43,7 +43,7 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public AfterGameResult saveGame(Game game) {
-        game.setScore((int)calculateScore(game));
+        game.setScore(calculateScore(game));
         AfterGameResult afterGameResult = createAfterGameResult(game);
 
 
@@ -61,7 +61,7 @@ public class GameServiceImpl implements GameService {
     private int calculateScore(Game game) {
         return (int) game.getRounds()
                 .stream()
-                .filter(round -> round.getGuessedPersonId() == round.getRightPersonId())
+                .filter(round -> round.getGuessedPersonId().equals(round.getRightPersonId()))
                 .count();
     }
 
