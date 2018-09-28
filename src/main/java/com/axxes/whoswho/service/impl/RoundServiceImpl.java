@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @Service
 public class RoundServiceImpl implements RoundService {
 
-    public static final int NUMBER_OF_ROUNDS = 20;
+    public static final int NUMBER_OF_ROUNDS = 4;
     public static final int NUMBER_OF_PERSONS_IN_ROUND = 4;
 
     private final PersonRepository personRepository;

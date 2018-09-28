@@ -32,7 +32,7 @@ public class WhoswhoApplication {
 		SpringApplication.run(WhoswhoApplication.class, args);
 	}
 
-	/*@Bean
+	@Bean
 	CommandLineRunner runner(PersonRepository personRepository) {
 		return args -> {
 			ObjectMapper mapper = new ObjectMapper();
@@ -46,5 +46,5 @@ public class WhoswhoApplication {
 				System.out.println("Unable to save users: " + e.getMessage());
 			}
 		};
-	}*/
+	}
 }

@@ -25,6 +25,9 @@ public class Round {
     @JsonIgnore
     private Game game;
 
+    public Round() {
+    }
+
     public Round(String rightPersonId, String guessedPersonId, List<Person> persons) {
         this.rightPersonId = rightPersonId;
         this.guessedPersonId = guessedPersonId;
